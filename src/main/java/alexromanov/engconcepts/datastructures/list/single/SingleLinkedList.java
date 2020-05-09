@@ -2,8 +2,8 @@ package alexromanov.engconcepts.datastructures.list.single;
 
 import java.util.Collection;
 
-public class SingleLinkedList<T> {
-    private SingleNode<T> head;
+public class SingleLinkedList<E> {
+    private SingleNode<E> head;
     private long size;
 
     public SingleLinkedList() {
@@ -11,39 +11,77 @@ public class SingleLinkedList<T> {
         this.size = 0;
     }
 
-    public void add(T data) {
+    /**
+     * Appends the element to the end of the list. Add new head in case if list is empty
+     * @param item
+     */
+    public boolean add(E item) {
         if (head == null) {
-            head = new SingleNode<>(data);
+            head = new SingleNode<>(item);
         } else {
-            SingleNode<T> node = head;
+            SingleNode<E> node = head;
             while (node.getNext() != null) {
                 node = node.getNext();
             }
-            node.setNext(new SingleNode<>(data));
+            node.setNext(new SingleNode<>(item));
         }
         size++;
+        return true;
     }
 
-    public void addAll(Collection<T> items) {
-        for (T item : items) add(item);
+    public void add(int index, E element){
+        if (head != null){
+            SingleNode<E> node = head;
+            int counter = 0;
+            while (counter < index){
+                node = node.getNext();
+                counter++;
+            }
+            SingleNode<E> curr = new SingleNode<>(element);
+            curr.setNext(node.getNext());
+            node.setNext(curr);
+        }
     }
 
-    public T remove() {
+    public boolean addAll(Collection<E> items) {
+        for (E item : items) {
+            boolean result = add(item);
+            if (!result) return false;
+        }
+        return true;
+    }
+
+    public boolean contains(E element){
+        boolean result = false;
+        if (head == null){
+            return result;
+        }
+        SingleNode<E> node = head;
+        while (node.getNext() != null){
+            if (node.getData().equals(element)) {
+                result = true;
+            }
+            node = node.getNext();
+        }
+        return result;
+    }
+
+    public E remove() {
         if (head == null) {
             return null;
         }
-        SingleNode<T> node = head;
+        SingleNode<E> node = head;
         this.head = head.getNext();
         size--;
         return node.getData();
     }
 
-    public T removeLast() {
-        T item = null;
+    public E removeLast() {
+        E item = null;
         if (size == 0) {
             return item;
         } else {
-            SingleNode<T> node = head;
+            SingleNode<E> node = head;
             while (node.getNext().getNext() != null) {
                 node = node.getNext();
             }
@@ -54,12 +92,12 @@ public class SingleLinkedList<T> {
         }
     }
 
-    public T get(int index) {
+    public E get(int index) {
         if (head == null || size <= index) {
             return null;
         }
         int count = 0;
-        SingleNode<T> node = head;
+        SingleNode<E> node = head;
         while (count != index) {
             node = node.getNext();
             count++;
@@ -82,7 +120,7 @@ public class SingleLinkedList<T> {
         } else {
             StringBuilder sb = new StringBuilder();
             sb.append("[ ");
-            SingleNode<T> node = head;
+            SingleNode<E> node = head;
             while (node.getNext() != null) {
                 sb.append(node.getData() + ", ");
                 node = node.getNext();

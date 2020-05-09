@@ -2,11 +2,11 @@ package alexromanov.engconcepts.datastructures.list.single;
 
 import java.util.Objects;
 
-public class SingleNode<T> {
-    private T data;
-    private SingleNode<T> next;
+public class SingleNode<E> {
+    private E data;
+    private SingleNode<E> next;
 
-    public SingleNode(T data) {
+    public SingleNode(E data) {
         this.data = data;
         this.next = null;
     }
@@ -32,19 +32,19 @@ public class SingleNode<T> {
         return Objects.hash(data, next);
     }
 
-    public T getData() {
+    public E getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(E data) {
         this.data = data;
     }
 
-    public SingleNode<T> getNext() {
+    public SingleNode<E> getNext() {
         return next;
     }
 
-    public void setNext(SingleNode<T> next) {
+    public void setNext(SingleNode<E> next) {
         this.next = next;
     }
 }
