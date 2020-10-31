@@ -1,7 +1,10 @@
 package alexromanov.engconcepts.leetcode.easy;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LeetCodeMain {
 
@@ -109,5 +112,19 @@ public class LeetCodeMain {
             n = n / 10;
         }
         return pr - sum;
+    }
+
+    /**
+     * 1295
+     * https://leetcode.com/problems/find-numbers-with-even-number-of-digits/
+     */
+    public int findNumbers(int[] nums) {
+        int res = 0;
+        for (int num : nums) {
+            if (String.valueOf(num).length() % 2 == 0) {
+                res++;
+            }
+        }
+        return res;
     }
 }
