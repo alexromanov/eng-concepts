@@ -9,6 +9,8 @@ import java.util.Set;
 public class LeetCodeMain {
 
     public static void main(String[] args) {
+        String a = "HellO";
+        System.out.println(toLowerCase(a));
     }
 
     /**
@@ -126,5 +128,21 @@ public class LeetCodeMain {
             }
         }
         return res;
+    }
+
+    /**
+     * 709 - https://leetcode.com/problems/to-lower-case/
+     */
+    public static String toLowerCase(String str) {
+        char[] orig = str.toCharArray();
+        int c;
+        for (int i = 0; i < orig.length; i++){
+            c = orig[i];
+            if (c >= 65 & c <= 90) {
+                c += 32;
+                orig[i] = (char) c;
+            }
+        }
+        return new String(orig);
     }
 }
