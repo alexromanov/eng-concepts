@@ -1,14 +1,18 @@
 package alexromanov.engconcepts.leetcode.easy;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import alexromanov.engconcepts.leetcode.easy.data.ListNode;
 
 public class LeetCodeMain {
 
     public static void main(String[] args) {
-
     }
 
     /**
@@ -196,5 +200,147 @@ public class LeetCodeMain {
             }
         }
         return null;
+    }
+
+    // 125 - https://leetcode.com/problems/valid-palindrome/
+    public static boolean isPalindrome(String s) {
+        int i = 0, j = s.length() - 1;
+        if (s.isEmpty() || s.isBlank()) {
+            return false;
+        }
+        while (i < j) {
+            while (i < j && !Character.isLetterOrDigit(s.charAt(i))) { i++; }
+            while (i < j && !Character.isLetterOrDigit(s.charAt(j))) { j--; }
+            if (Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j))) {
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
+
+    // 1290 - https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/
+    public int getDecimalValue(ListNode head) {
+        StringBuilder s = new StringBuilder();
+        while (head != null) {
+            s.append(String.valueOf(head.val));
+            head = head.next;
+        }
+        return Integer.parseInt(s.toString(), 2);
+    }
+
+    // 905 - https://leetcode.com/problems/sort-array-by-parity/
+    public int[] sortArrayByParity(int[] A) {
+        int[] res = new int[A.length];
+        int j = 0;
+        for (int i = 0; i < A.length; i++) {
+            if (A[i] % 2 == 0) {
+                res[j] = A[i];
+                j++;
+            }
+        }
+        for (int i = 0; i < A.length; i++) {
+            if (A[i] % 2 != 0) {
+                res[j] = A[i];
+                j++;
+            }
+        }
+        return res;
+    }
+
+    // 1351 - https://leetcode.com/problems/count-negative-numbers-in-a-sorted-matrix/
+    public int countNegatives(int[][] grid) {
+        int n = 0;
+        for (int row = 0; row < grid.length; row++) {
+            for (int col = 0; col < grid[row].length; col++) {
+                if (grid[row][col] < 0) {
+                    n++;
+                }
+            }
+        }
+        return n;
+    }
+
+    // 344 - https://leetcode.com/problems/reverse-string/
+    public void reverseString(char[] s) {
+        int i = 0;
+        char c;
+        while (i < s.length / 2) {
+            c = s[i];
+            s[i] = s[s.length - 1 - i];
+            s[s.length - 1 - i] = c;
+            i++;
+        }
+    }
+
+    // 1502 - https://leetcode.com/problems/can-make-arithmetic-progression-from-sequence/
+    public boolean canMakeArithmeticProgression(int[] arr) {
+        Arrays.sort(arr);
+        int d = arr[1] - arr[0];
+        for (int i = 1; i < arr.length - 1; i++) {
+            if ((arr[i + 1] - arr[i]) != d) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // 509 - https://leetcode.com/problems/fibonacci-number/
+    public int fib(int N) {
+        if (N <= 1){
+            return N;
+        } else {
+            return fib(N-1) + fib(N-2);
+        }
+    }
+
+    // 1491 - https://leetcode.com/problems/average-salary-excluding-the-minimum-and-maximum-salary/
+    public double average(int[] salary) {
+        int min = salary[0];
+        int max = salary[0];
+        int sum = salary[0];
+        for (int i = 1; i < salary.length; i++){
+            if (salary[i] > max){
+                max = salary[i];
+            }
+            if (salary[i] < min){
+                min = salary[i];
+            }
+            sum += salary[i];
+        }
+        return (double) (sum - max - min) / (salary.length - 2);
+    }
+
+    // 876 - https://leetcode.com/problems/middle-of-the-linked-list/
+    public ListNode middleNode(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
+    // 237 - https://leetcode.com/problems/delete-node-in-a-linked-list/
+    public void deleteNode(ListNode node) {
+        node.val = node.next.val;
+        node.next = node.next.next;
+    }
+
+    public ListNode deleteDuplicates(ListNode head) {
+        Set<Integer> set = new HashSet<>();
+        ListNode temp = head;
+        while (temp != null && temp.next != null){
+            if (set.contains(temp.val)){
+                temp.val = temp.next.val;
+                temp.next = temp.next.next;
+            } else {
+                set.add(temp.val);
+            }
+            temp = temp.next;
+        }
+        return head;
     }
 }

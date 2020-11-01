@@ -1,4 +1,4 @@
-package alexromanov.engconcepts.leetcode.easy;
+package alexromanov.engconcepts.leetcode.easy.data;
 
 /**
  * 1603 - https://leetcode.com/problems/design-parking-system/
