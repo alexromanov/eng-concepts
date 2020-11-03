@@ -329,17 +329,19 @@ public class LeetCodeMain {
         node.next = node.next.next;
     }
 
+    // 83 - https://leetcode.com/problems/remove-duplicates-from-sorted-list/
     public ListNode deleteDuplicates(ListNode head) {
         Set<Integer> set = new HashSet<>();
-        ListNode temp = head;
-        while (temp != null && temp.next != null){
-            if (set.contains(temp.val)){
-                temp.val = temp.next.val;
-                temp.next = temp.next.next;
+        ListNode curr = head;
+        ListNode prev = curr;
+        while (curr != null){
+            if (set.contains(curr.val)){
+                prev.next = curr.next;
             } else {
-                set.add(temp.val);
+                set.add(curr.val);
+                prev = curr;
             }
-            temp = temp.next;
+            curr = curr.next;
         }
         return head;
     }
