@@ -27,4 +27,20 @@ public class ArrayTest {
     public void shouldFindArraysIntersection() {
         assertThat(Array.intersection(new int[] {3,1,4,2}, new int[] {4,5,3,6})).isEqualTo(new int[] {3,4});
     }
+
+    @Test
+    public void shouldCheckIfArrayHasTwoSum(){
+        assertThat(Array.twoSum(arrayForSorting, 6)).isEqualTo(true);
+        assertThat(Array.twoSum(arrayForSorting, 12)).isEqualTo(false);
+    }
+
+    @Test
+    public void shouldReturnMeanAverageOfEventNumbers() {
+        assertThat(Array.averageOfEventNumbers(arrayForSorting)).isEqualTo(3.0);
+    }
+
+    @Test
+    public void shouldReturnArraySample(){
+        assertThat(Array.arraySample(arrayForSorting)).isEqualTo(new int[] {4,7,3});
+    }
 }

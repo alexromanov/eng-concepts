@@ -87,4 +87,32 @@ public class Array {
     public static Integer[] intersectionSet(Integer[] arr1, Integer[] arr2){
         return Stream.of(arr1).filter(Arrays.asList(arr2)::contains).distinct().toArray(Integer[]::new);
     }
+
+    public static boolean twoSum(int[] arr, int n){
+        for (int i = 0; i < arr.length; i++){
+            for (int j = 0; j < arr.length; j++){
+                if (i != j && arr[i] + arr[j] == n){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static double averageOfEventNumbers(int[] nums){
+        int count = 0;
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++){
+            if (nums[i] % 2 == 0){
+                sum += nums[i];
+                count++;
+            }
+        }
+        return sum / count;
+    }
+
+    public static int[] arraySample(int[] nums){
+        int mid = nums[(nums.length - 1) / 2];
+        return new int[] {nums[0], mid, nums[nums.length - 1]};
+    }
 }

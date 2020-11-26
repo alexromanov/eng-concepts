@@ -10,7 +10,7 @@ import java.util.Set;
 
 import alexromanov.engconcepts.leetcode.easy.data.ListNode;
 
-public class LeetCodeMain {
+public class LeetCodeEasy {
 
     public static void main(String[] args) {
     }
@@ -288,10 +288,10 @@ public class LeetCodeMain {
 
     // 509 - https://leetcode.com/problems/fibonacci-number/
     public int fib(int N) {
-        if (N <= 1){
+        if (N <= 1) {
             return N;
         } else {
-            return fib(N-1) + fib(N-2);
+            return fib(N - 1) + fib(N - 2);
         }
     }
 
@@ -300,11 +300,11 @@ public class LeetCodeMain {
         int min = salary[0];
         int max = salary[0];
         int sum = salary[0];
-        for (int i = 1; i < salary.length; i++){
-            if (salary[i] > max){
+        for (int i = 1; i < salary.length; i++) {
+            if (salary[i] > max) {
                 max = salary[i];
             }
-            if (salary[i] < min){
+            if (salary[i] < min) {
                 min = salary[i];
             }
             sum += salary[i];
@@ -316,7 +316,7 @@ public class LeetCodeMain {
     public ListNode middleNode(ListNode head) {
         ListNode fast = head;
         ListNode slow = head;
-        while (fast != null && fast.next != null){
+        while (fast != null && fast.next != null) {
             fast = fast.next.next;
             slow = slow.next;
         }
@@ -334,12 +334,39 @@ public class LeetCodeMain {
         Set<Integer> set = new HashSet<>();
         ListNode curr = head;
         ListNode prev = curr;
-        while (curr != null){
-            if (set.contains(curr.val)){
+        while (curr != null) {
+            if (set.contains(curr.val)) {
                 prev.next = curr.next;
             } else {
                 set.add(curr.val);
                 prev = curr;
+            }
+            curr = curr.next;
+        }
+        return head;
+    }
+
+    // 326 - https://leetcode.com/problems/power-of-three/
+    public static boolean powerOfThree(int n) {
+        if (n < 1) {
+            return false;
+        }
+
+        while (n % 3 == 0) {
+            n /= 3;
+        }
+
+        return n == 1;
+    }
+
+    public static ListNode removeElements(ListNode head, int val) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode curr = head;
+        while (curr.next != null) {
+            if (curr.next.val == val) {
+                curr.next = curr.next.next;
             }
             curr = curr.next;
         }
