@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import alexromanov.engconcepts.algorithms.array.Array;
 import alexromanov.engconcepts.leetcode.easy.data.ListNode;
 
 public class LeetCodeEasy {
@@ -371,5 +372,77 @@ public class LeetCodeEasy {
             curr = curr.next;
         }
         return head;
+    }
+
+    // 1572 - https://leetcode.com/problems/matrix-diagonal-sum/
+    public static int diagonalSum(int[][] mat) {
+        int len = mat.length;
+        int principal = 0, secondary = 0;
+        for (int i = 0; i < len; i++){
+            principal += mat[i][i];
+        }
+        int i = 0;
+        int j = len - 1;
+        while (i < mat.length) {
+            secondary += mat[i][j];
+            i++;
+            j--;
+        }
+        if (len % 2 != 0){
+            secondary -= mat[len / 2][len / 2];
+        }
+        return principal + secondary;
+    }
+
+    public String freqAlphabets(String s) {
+        Map<String, String> sym = new HashMap<>();
+        sym.put("1", "a");
+        sym.put("2", "b");
+        sym.put("3", "c");
+        sym.put("4", "d");
+        sym.put("5", "e");
+        sym.put("6", "f");
+        sym.put("7", "g");
+        sym.put("8", "h");
+        sym.put("9", "i");
+        sym.put("10#", "j");
+        sym.put("11#", "k");
+        sym.put("12#", "l");
+        sym.put("13#", "m");
+        sym.put("14#", "n");
+        sym.put("15#", "o");
+        sym.put("16#", "p");
+        sym.put("17#", "q");
+        sym.put("18#", "r");
+        sym.put("19#", "s");
+        sym.put("20#", "t");
+        sym.put("21#", "u");
+        sym.put("22#", "v");
+        sym.put("23#", "w");
+        sym.put("24#", "x");
+        sym.put("25#", "y");
+        sym.put("26#", "z");
+
+        int i = 0;
+        StringBuilder sb = new StringBuilder();
+        while (i != s.length()){
+            if (s.substring(i, i+3).contains("#")){
+                sb.append(sym.get(s.substring(i, i+3)));
+                i += 3;
+            } else {
+                sb.append(s.charAt(i));
+                i++;
+            }
+        }
+        return sb.toString();
+    }
+
+    // 977 - https://leetcode.com/problems/squares-of-a-sorted-array/
+    public int[] sortedSquares(int[] nums) {
+        for (int i = 0; i < nums.length; i++){
+            nums[i] = nums[i]*nums[i];
+        }
+        Arrays.sort(nums);
+        return nums;
     }
 }
