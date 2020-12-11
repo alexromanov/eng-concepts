@@ -1,10 +1,11 @@
 package alexromanov.engconcepts.coursera.algorithmsp1;
 
-public class QuickFindUnionFind {
+// Union-Find data structure with quick-find algorithm
+public class QuickFind {
 
     private int[] id;
 
-    public QuickFindUnionFind(int N) {
+    public QuickFind(int N) {
         id = new int[N];
         for (int i = 0; i < N; i++) {
             id[i] = i;
