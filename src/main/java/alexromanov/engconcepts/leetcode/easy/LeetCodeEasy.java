@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import alexromanov.engconcepts.algorithms.array.Array;
 import alexromanov.engconcepts.leetcode.easy.data.ListNode;
+import alexromanov.engconcepts.leetcode.easy.data.TreeNode;
 
 public class LeetCodeEasy {
 
@@ -378,7 +378,7 @@ public class LeetCodeEasy {
     public static int diagonalSum(int[][] mat) {
         int len = mat.length;
         int principal = 0, secondary = 0;
-        for (int i = 0; i < len; i++){
+        for (int i = 0; i < len; i++) {
             principal += mat[i][i];
         }
         int i = 0;
@@ -388,7 +388,7 @@ public class LeetCodeEasy {
             i++;
             j--;
         }
-        if (len % 2 != 0){
+        if (len % 2 != 0) {
             secondary -= mat[len / 2][len / 2];
         }
         return principal + secondary;
@@ -425,9 +425,9 @@ public class LeetCodeEasy {
 
         int i = 0;
         StringBuilder sb = new StringBuilder();
-        while (i != s.length()){
-            if (s.substring(i, i+3).contains("#")){
-                sb.append(sym.get(s.substring(i, i+3)));
+        while (i != s.length()) {
+            if (s.substring(i, i + 3).contains("#")) {
+                sb.append(sym.get(s.substring(i, i + 3)));
                 i += 3;
             } else {
                 sb.append(s.charAt(i));
@@ -439,10 +439,53 @@ public class LeetCodeEasy {
 
     // 977 - https://leetcode.com/problems/squares-of-a-sorted-array/
     public int[] sortedSquares(int[] nums) {
-        for (int i = 0; i < nums.length; i++){
-            nums[i] = nums[i]*nums[i];
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = nums[i] * nums[i];
         }
         Arrays.sort(nums);
         return nums;
+    }
+
+    // 1492. The kth Factor of n
+    public int kthFactor(int n, int k) {
+        int i = 1;
+        int c = 0;
+        while (i <= n) {
+            if (n % i == 0) {
+                c++;
+            }
+            if (c == k) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+
+    // 700. Search in a Binary Search Tree
+    public TreeNode searchBST(TreeNode root, int val) {
+        while (root != null) {
+            if (root.val == val) {
+                return root;
+            } else if (val < root.val) {
+                root = root.left;
+            } else if (val > root.val) {
+                root = root.right;
+            }
+        }
+        return root;
+    }
+
+    // 206. Reverse Linked List
+    public ListNode reverseList(ListNode head) {
+        ListNode previous = null;
+        ListNode current = head;
+        while (current != null){
+            ListNode next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+        return previous;
     }
 }
